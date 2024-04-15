@@ -1,0 +1,120 @@
+// Заголовки, загальні БЕМ блоки та інше...
+
+.title {
+    font-weight: 700;
+    @include adaptiveValue("font-size", 48, 32, 0, 1440, 320);
+    line-height: 1.2;
+}
+
+.text {
+    @include adaptiveValue("font-size", 18, 16, 0, 1440, 320);
+    line-height: 1.5;
+    color: $addColor;
+}
+
+.label {
+    // display: inline-flex;
+    align-self: flex-start;
+    font-size: toRem(14);
+    line-height: 1.5;
+    padding: toRem(4) toRem(15);
+    border-radius: toRem(15);
+    background-color: $addBg;
+}
+
+.button {
+        font-size: toRem(16);
+        line-height: 1.5;
+        padding: toRem(8) toRem(20);
+        border-radius: toRem(8);
+
+    &--white {
+        background-color: $white;
+        border: toRem(1) solid $addBg;
+        box-shadow: 0 toRem(5) toRem(10) rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease 0s;
+
+        @media (any-hover: hover) {
+            &:hover {
+                background-color: $colorBgDark;
+                color: $white;
+            }
+            
+        }
+    }
+    
+    &--color {
+        color: $white;
+        background-color: $colorBg;
+        border: toRem(1) solid $colorBg;
+        transition: all 0.3s ease 0s;
+
+        @media (any-hover: hover) {
+            &:hover {
+                background-color: $colorBgLite;
+                color: $colorBg;
+            }
+        }
+    }
+
+    &--cart {
+        z-index: 3;
+        display: flex;
+        align-items: center;
+        gap: toRem(10);
+    }
+
+    &--shevron {
+        display: flex;
+        align-items: center;
+        gap: toRem(10);
+        border: toRem(1) solid transparent;
+        transition: all 0.3s ease 0s;
+
+        svg {
+            transition: all 0.3s ease 0s;
+        }
+
+        @media (any-hover: hover) {
+            &:hover {
+                color: $colorBg;
+                border-color: $colorBg;
+            }
+            &:hover svg path {
+                fill: $colorBg;
+            }
+            &:hover svg {
+                transform: translateX(toRem(5)) scale(1.5);
+            }
+        }
+    }
+
+    &--header {
+
+        @media (max-width: $mobileSmall) {
+            position: fixed;
+            top: toRem(130);
+            left: -100%;
+            width: 90%;
+            border: toRem(1) solid $white;
+            z-index: 5;
+            overflow: auto;
+            transition: all 0.3s ease 0s;
+    
+            .menu-open & {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+        }
+    }
+}
+
+.buttons {
+    display: flex;
+    gap: toRem(20);
+
+    @media (max-width: $mobileSmall) {
+        flex-direction: column;
+        align-items: center;
+    }
+}

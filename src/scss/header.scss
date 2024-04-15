@@ -1,0 +1,349 @@
+
+.info {
+    background-color: $colorBgDark;
+    color: $white;
+
+    /* .info__container */
+
+    &__container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: toRem(14);
+        line-height: 1.5;
+        max-width: toRem(1440);
+        padding: toRem(10) toRem(40);
+    }
+
+    /* .info__text */
+
+    &__text {
+        flex-grow: 1;
+        text-align: center;
+    }
+
+    /* .info__button */
+
+    &__button {
+        font-size: toRem(20);
+    }
+}
+
+.header {
+    position: relative;
+    z-index: 5;
+
+    /* .header__info */
+
+    &__info {
+    }
+
+    /* .header__container */
+
+    &__container {
+        background-color: $white;
+        padding: toRem(15);
+    }
+
+    /* .header__body */
+
+    &__body {
+        display: flex;
+        align-items: center;
+        gap: toRem(16);
+    }
+
+    /* .header__logo */
+
+    &__logo {
+        position: relative;
+        display: flex;
+        align-items: center;
+        gap: toRem(10);
+        flex-grow: 1;
+        z-index: 5;
+    }
+
+    /* .header__menu */
+
+    &__menu {
+        display: flex;
+    }
+
+    /* .header__search */
+
+    &__search {
+        position: relative;
+        z-index: 5;
+        display: flex;
+        flex-direction: row-reverse;
+        gap: toRem(10);
+        flex: 0 0 toRem(110);
+
+        input {
+            padding: toRem(5);
+            font-size: toRem(20);
+        }
+
+        @media (max-width: $tablet) {
+            flex: 1 1 auto;
+        }
+
+        @media (max-width: $mobileLarge) {
+            position: fixed;
+            top: toRem(80);
+            left: -100%;
+            width: 90%;
+            background-color: $white;
+            border-radius: toRem(8);
+            z-index: 5;
+            padding: toRem(5) toRem(15);
+            overflow: auto;
+            transition: all 0.3s ease 0s;
+
+            .menu-open & {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+
+        }
+    }
+
+    /* .header__actions */
+
+    &__actions {
+        position: relative;
+        z-index: 5;
+        display: flex;
+        gap: toRem(16);
+    }
+}
+
+.logo {
+
+    /* .logo__image */
+
+    &__image {
+        width: toRem(32);
+        height: toRem(32);
+        border-radius: toRem(10);
+        background-color: $colorBg;
+    }
+
+    /* .logo__text */
+
+    &__text {
+        font-family: "Montserrat", sans-serif;
+        font-optical-sizing: auto;
+        font-size: toRem(22);
+        font-weight: 700;
+    }
+}
+
+.menu {
+
+    /* .menu__body */
+
+    &__body {
+    }
+
+    /* .menu__list */
+
+    &__list {
+        display: flex;
+        align-items: center;
+        gap: toRem(5) toRem(32);
+        flex-wrap: wrap;
+        flex: 0 1 toRem(380);
+
+        @media (max-width: $tablet) {
+            align-items: flex-end;
+            gap: toRem(32);
+        }
+
+        @media (max-width: $mobileSmall) {
+            align-items: center;
+        }
+    }
+
+    /* .menu__item */
+
+    &__item {
+        position: relative;
+        padding: toRem(5);
+
+        &--parent {
+        position: relative;
+        display: flex;
+        gap: toRem(10);
+        transition: all 0.3s ease 0s;
+
+        &::after {
+            content: "";
+            position: relative;
+            top: toRem(5);
+            right: 0;
+            width: toRem(10);
+            height: toRem(10);
+            border-top: toRem(3) solid $mainColor;
+            border-right: toRem(3) solid $mainColor;
+            transform: rotate(135deg);
+            transition: all 0.3s ease 0s;
+        }
+
+        @media (max-width: $tablet) {
+            width: toRem(250);
+            display: block;
+
+            &::after {
+                display: none;
+            }
+        }
+
+        @media (any-hover: hover) and (min-width: $tablet) {
+            &:hover {
+                .sub-menu__list {
+                    opacity: 1;
+                    visibility: visible;
+                    display: block;
+                    pointer-events: all;
+                }
+                &::after {
+                    transform: rotateY(-180deg) rotateZ(-45deg) translateX(-3px) translateY(3px);
+
+                }
+            }
+        }
+    }
+}
+
+    /* .menu__link */
+
+    &__link {
+
+        &::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: toRem(2);
+            background-color: $colorBg;
+            transition: all 0.3s ease 0s;
+        }
+
+        @media (any-hover: hover) and (min-width: $tablet) {
+            &:hover::after {
+                width: 100%;
+                left: 0;
+            }
+            
+        }
+    }
+}
+
+.sub-menu {
+    position: relative;
+
+    /* .sub-menu__title */
+
+    &__title {
+       
+        @media (max-width: $tablet) {
+            text-align: right;
+        }
+    }
+
+    /* .sub-menu__list */
+
+    &__list {
+        position: absolute;
+        display: grid;
+        width: 130%;
+        padding-top: toRem(22);
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        transition: all 0.3s ease 0s;
+
+        @media (max-width: $tablet) {
+            position: static;
+            opacity: 1;
+            visibility: visible;
+            width: 100%;
+            pointer-events: all;
+            gap: toRem(8);
+        }
+    }
+
+    /* .sub-menu__item */
+
+    &__item {
+        position: relative;
+        z-index: 5;
+        transition: all 0.3s ease 0s;
+
+        @media (min-width: $tablet) {
+            background-color: $colorBgLite;
+            width: 150%;
+
+            @media (any-hover: hover) {
+                &:hover {
+                    background-color: $colorBgDark;
+                    color: $white;
+                }
+            }
+
+            &:not(:last-child) {
+                border-bottom: toRem(3) solid $mainBg;
+            }
+        }
+
+        @media (max-width: $tablet) {
+            color: $white;
+            border: toRem(1) solid $white;
+            border-radius: toRem(8);
+            font-size: toRem(20);
+            font-weight: 700;
+            transition: all 0.3s ease 0s;
+
+            @media (any-hover: hover) {
+                &:hover {
+                    background-color: $white;
+                    color: $colorBg;
+                }
+                
+            }
+        }
+    }
+
+    /* .sub-menu__link */
+
+    &__link {
+        padding: toRem(16);
+    }
+}
+
+.search-form {
+
+    /* .search-form__input */
+
+    &__input {
+    }
+
+    /* .search-form__button */
+
+    &__button {
+    }
+}
+
+.actions {
+    display: flex;
+
+    /* .actions__button */
+
+    &__button {
+        flex-shrink: 0;
+    }
+}
+
